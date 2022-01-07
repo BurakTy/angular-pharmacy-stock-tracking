@@ -1,0 +1,122 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$blue:    #0d6efd;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #d63384;
+$red:     #dc3545;
+$orange:  #fd7e14;
+$yellow:  #ffc107;
+$green:   #198754;
+$green2:   #28a745;
+$teal:    #20c997;
+$cyan:    #0dcaf0;
+$white:    #fff;
+$black:    #000;
+$secondary:#6c757d;
+.my-alternate-theme {
+  $my-alternate-primary: mat-palette($mat-red);
+  $my-alternate-accent: mat-palette($mat-green, 400);
+  $my-alternate-warn: mat-palette($mat-grey);
+  $my-alternate-success: mat-palette($mat-pink);
+
+  $my-alternate-theme: mat-light-theme(
+    $my-alternate-primary,
+    $my-alternate-accent,
+    $my-alternate-warn
+  );
+
+  @include angular-material-theme($my-alternate-theme);
+}
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+  color:  $green2;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: $white;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: $white;
+  background-color:   $green2;
+}
+
+.mat-icon-button.mat-success {
+  color:   $green2;
+}
+
+.mat-button.mat-secondary,
+.mat-stroked-button.mat-secondary {
+  color:  $secondary;
+}
+.mat-button.mat-secondary:hover,
+.mat-stroked-button.mat-secondary:hover {
+  background-color: $white;
+}
+
+.mat-raised-button.mat-secondary,
+.mat-flat-button.mat-secondary,
+.mat-fab.mat-secondary,
+.mat-mini-fab.mat-secondary {
+  color: $white;
+  background-color:   $secondary;
+}
+
+.mat-icon-button.mat-secondary {
+  color:   $secondary;
+}
+
+mat-nav-list.list-horizontal {
+  padding: 0;
+  .mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: 120px;
+
+  }
+  .mat-list-item .mat-list-item-content{
+    padding: 0px !important;
+  }
+  .mat-list-item .mat-list-text{
+    font-size: 85% !important;
+    padding-left: 0px !important;
+  }
+  .mat-list-item mat-icon{
+    font-size:medium !important;
+    display: flex;
+    align-items: center;
+  }
+  
+}
+
+.success-snackbar {
+  background: $teal;
+}
+
+.error-snackbar {
+  background: $red;
+}
+
+.info-snackbar {
+  background: $cyan;
+}
+
+.success-icon {
+  color: $green;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.success-icon svg {
+  fill: $green;
+}
+
+.fixed-button{
+  position: fixed !important; 
+  bottom: 70px; 
+  right: 70px
+}

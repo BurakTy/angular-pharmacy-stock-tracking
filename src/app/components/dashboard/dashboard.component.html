@@ -1,0 +1,28 @@
+<app-nav></app-nav>
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="side"  class="side-nav" *ngIf="false">
+    <mat-nav-list>
+        <a mat-list-item routerLink="/">
+            <mat-icon matListIcon >home</mat-icon>
+            <p matLine>Onaylama</p>
+        </a>
+        <a mat-list-item [routerLink]="['/stokcikis']" routerLinkActive="active"   >
+            <mat-icon matListIcon >checklist_rtl</mat-icon>
+            <p matLine>Siparişler</p>
+        </a>
+        <a mat-list-item  routerLink="/stokdepo" routerLinkActive="active" >
+            <mat-icon matListIcon>backup_table</mat-icon>
+            <p matLine>Depo Ekle</p>
+        </a>
+        <a mat-list-item  routerLink="/stokkart" routerLinkActive="active" >
+          <mat-icon matListIcon>storage</mat-icon>
+          <p matLine>Stok Ekle</p>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="example-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

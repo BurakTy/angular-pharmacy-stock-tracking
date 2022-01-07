@@ -1,0 +1,55 @@
+<div style=" padding: 20px">
+    <div>
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Arama</mat-label>
+          <input type="search" matInput placeholder="Arama" autocomplete="off" (input)="searchByName($event)" (keydown.enter)="searchByName($event)" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    <mat-grid-list cols="1" rowHeight="fit" style="height: calc(100vh - 210px)" gutterSize="20px"
+      class="mat-grid-tile-depo">
+      <mat-grid-tile>
+        <mat-card class="card-container mat-elevation-z8">
+          <mat-card-content>
+            <table #siparisList mat-table [dataSource]="depoTumStokListesi">
+              <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let i = index;"><b>#{{i+1}}</b></td>
+              </ng-container>
+  
+              <ng-container matColumnDef="barkodNo">
+                <th mat-header-cell *matHeaderCellDef>BARKOD NO</th>
+                <td mat-cell *matCellDef="let element">{{ element.barkodNo }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="stokAd">
+                <th mat-header-cell *matHeaderCellDef>ADI</th>
+                <td mat-cell *matCellDef="let element">{{ element.stokAd }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="stokTur">
+                <th mat-header-cell *matHeaderCellDef>STOK TÜRÜ</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.stokTur == "1" ? "İLAÇ" : element.stokTur=="2"?"SARF MALZEME":"ORTEZ PROTEZ MALZEME" }}
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="anaBirimN">
+                <th mat-header-cell *matHeaderCellDef>ANABIRIM</th>
+                <td mat-cell *matCellDef="let element">{{ element.anaBirimN }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="toplam">
+                <th mat-header-cell *matHeaderCellDef>Stok</th>
+                <td mat-cell *matCellDef="let element"><span class="text-danger">{{element.toplam}}</span> </td>
+              </ng-container>  
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+  
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

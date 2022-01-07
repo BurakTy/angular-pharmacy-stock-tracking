@@ -1,0 +1,166 @@
+<div style="height: calc(100vh - 150px); padding: 20px">
+    <mat-grid-list cols="1" rowHeight="fit" style="height: calc(100vh - 150px)" gutterSize="20px"
+        class="mat-grid-tile-depo">
+        <mat-grid-tile>
+            <mat-card class="card-container mat-elevation-z8">
+                <mat-card-title>
+                    <mat-toolbar color="dark">
+                      <span class="example-spacer"></span>
+                      <button mat-button class="mat-success" (click)="gecmisFaturaListesi()">Geçmiş Fatura Listesi</button>
+                    </mat-toolbar>
+                  </mat-card-title>
+                <mat-divider></mat-divider>
+                <form class="d-flex align-items-baseline w-100 py-2" [formGroup]="faturaForm" autocomplete="off">
+                    <mat-form-field class="example-full-width mx-1" appearance="fill" style=" min-width:40%">
+                        <mat-label>Malzeme Adı</mat-label>
+                        <input type="text" placeholder="Malzeme Adı" aria-label="Malzeme Adı" matInput
+                            [matAutocomplete]="auto" (input)="searchByName($event)" formControlName="stok" required>
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFnKart"  (optionSelected)="changeBirim($event.option.value)">
+                            <mat-option *ngFor="let option of aramaListesi " [value]="option" title="{{option.stokAd}}">
+                                <small>{{option.stokAd}}  - <small>{{ option.stokTur == 1 ? "İLAÇ" : (option.stokTur==2?"SARF":(option.stokTur==3?"ORTEZ":"")) }}</small></small>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="mx-1" appearance="fill">
+                        <mat-label>Birim</mat-label>
+                        <input type="text" placeholder="Birim" aria-label="Birim" matInput [matAutocomplete]="birim"
+                            formControlName="birim" required>
+                        <mat-autocomplete autoActiveFirstOption #birim="matAutocomplete" [displayWith]="displayFnBirim">
+                            <mat-option *ngFor="let option of birimler " [value]="option" title="{{option.birimAdi}}">
+                                <small>{{option.birimAdi}} - {{option.kisaltma}}</small>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="mx-1" appearance="fill">
+                        <mat-label>Adet</mat-label>
+                        <input type="number" placeholder="Adet" aria-label="Adet" matInput formControlName="adet"
+                            required>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="mx-1" appearance="fill">
+                        <mat-label>Fiyat</mat-label>
+                        <input type="number" placeholder="Fiyat" aria-label="Fiyat" matInput
+                            formControlName="birimFiyat" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Son Kullanma Tarih</mat-label>
+                        <input matInput [matDatepicker]="picker" placeholder="dd.mm.yyyy" required
+                            formControlName="sonKulTarih">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <div style="align-self: flex-start">
+                        <button mat-icon-button class="mat-success m-1" (click)="addFatura()"
+                            [disabled]="!faturaForm.valid">
+                            <mat-icon style="width: 35px;font-size: 35px">add</mat-icon>
+                        </button>
+                    </div>
+
+
+
+                    <!-- <mat-form-field appearance="fill" class="w-100 mx-2">
+                        <mat-label>Search by Name / İsim ile Arama</mat-label>
+                        <input type="search" matInput placeholder="Arama" autocomplete="off"
+                            (keydown.enter)="searchByName($event)" [(ngModel)]="searchName" />
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-100 mx-2">
+                        <mat-label>Search by Barcode / Barkod ile Arama</mat-label>
+                        <input type="search" matInput placeholder="Arama" autocomplete="off" [(ngModel)]="searchBarkod"
+                            (keydown.enter)="searchByName($event)" />
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field> -->
+
+                </form>
+
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <span *ngIf="aramaListesi.length==0 && notFound" class="text-danger">Not Found /
+                        Bulunamadı</span>
+                    <table #stokekletable mat-table [dataSource]="faturaListesi" style="overflow-y: auto;">
+                        <ng-container matColumnDef="index">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let i = index;"><b>{{i+1}}-</b></td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stokAd">
+                            <th mat-header-cell *matHeaderCellDef>ADI</th>
+                            <td mat-cell *matCellDef="let element">{{ element.stok.stokAd }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="stokTur">
+                            <th mat-header-cell *matHeaderCellDef>STOK TÜRÜ</th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.stok.stokTur == 1 ? "İLAÇ" : (element.stok.stokTur==2?"SARF":(element.stok.stokTur==3?"ORTEZ":"")) }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="anaBirim">
+                            <th mat-header-cell *matHeaderCellDef>ANABIRIM</th>
+                            <td mat-cell *matCellDef="let element">{{ element.birim.birimAdi }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="adet">
+                            <th mat-header-cell *matHeaderCellDef>ADET</th>
+                            <td mat-cell *matCellDef="let element">{{ element.adet }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fiyat">
+                            <th mat-header-cell *matHeaderCellDef>FİYAT</th>
+                            <td mat-cell *matCellDef="let element">{{ element.birimFiyat }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="toplam">
+                            <th mat-header-cell *matHeaderCellDef>TOPLAM</th>
+                            <td mat-cell *matCellDef="let element">{{ element.toplam }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="tarih">
+                            <th mat-header-cell *matHeaderCellDef>SON KUL.TARİH</th>
+                            <td mat-cell *matCellDef="let element">{{ element.sonKulTarih | date }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="button">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button color="warn" (click)="removeFromlist(element)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-card-content>
+                <mat-card-actions class="fixed-button">
+                    <div *ngIf="faturaToplam!=0">
+                        TOPLAM = <b> {{faturaToplam | currency:" "}}</b>
+                    </div><br>
+                    <div style="display:flex">
+                        <button mat-icon-button color="warn" class="float-right"
+                            [disabled]="faturaListesi.length<=0 && responseFaturoId==0 " (click)="removeFaturaList()">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <div *ngIf="responseFaturoId!=0" style="display:flex;">
+
+                            <button mat-icon-button title="Download" (click)="getPdf()">
+                                <mat-icon style="font-size: 30px;" matBadge="1"  matBadgeSize="small">description</mat-icon>
+                            </button>
+                            <button mat-icon-button title="Download" (click)="getPdfB()">
+                                <mat-icon style="font-size: 30px;" matBadge="2"  matBadgeSize="small">description</mat-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="responseFaturoId!==0">
+                            <button mat-raised-button color="primary" *ngIf="!loading" (click)="saveFaturaList()">
+                                Kaydet</button><!--  [disabled]="faturaListesi.length<=0" -->
+                            <mat-spinner class="spinner-loading" *ngIf="loading"></mat-spinner>
+                        </div>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

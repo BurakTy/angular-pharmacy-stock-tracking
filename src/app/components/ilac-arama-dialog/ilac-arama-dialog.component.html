@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>İlaç Arama</h1>
+<div>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Arama</mat-label>
+    <input type="search" matInput placeholder="Arama" autocomplete="off" (input)="searchByName($event)" (keydown.enter)="searchByName($event)" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+<div mat-dialog-content style="min-width: 50vw">
+  <mat-divider></mat-divider>
+  <mat-list>
+    <div mat-subheader><div class="w-100">Arama Sonuç <span class="float-right">{{aramaListesi.length}} </span> <span class="ml-3 text-danger small">Sadece Aynı Tip ürün Eklenebilir</span></div></div>
+    <mat-list-item *ngFor="let item of aramaListesi" class="py-2" style="font-size: inherit">
+      <div class="d-flex align-items-baseline w-100 py-2" style="border-bottom: 1px solid grey">
+        <div class="d-flex align-items-baseline">
+          <button mat-icon-button class="mat-success" (click)="adetChange(item, 1)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <input type="number" matInput placeholder="0" class="border border-secondary text-center"
+            style="max-width: 60px;min-width: 40px;" min="0" autocomplete="off" [(ngModel)]="item.adet" />
+          <button mat-icon-button color="warn" (click)="adetChange(item, -1)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <span class="example-spacer "></span>
+        <div class="w-100">
+          <span class="float-right mx-5 small pt-2">  <span class="text-primary" style="font-size:small;">{{item.toplam}}</span> / {{ item.stokTur == 1 ? "İLAÇ" : item.stokTur==2?"SARF":"ORTEZ" }}</span>
+          <div class="span-dot ml-3" title="{{item.stokAd}}">
+            {{item.stokAd}}
+          </div>
+        </div>
+        <span class="example-spacer "></span>
+        <button mat-stroked-button color="primary" (click)="addOrders(item)">Ekle</button>
+      </div>
+    </mat-list-item>
+
+  </mat-list>
+</div>

@@ -1,0 +1,376 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  font-size: 85% !important;
+  zoom: 100%;
+  min-width: 500px;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #76838f;
+  border-radius: 10px;
+}
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input {
+  font-size: 13px!important;
+}
+
+.span-dot {
+  display: inline-block;
+  max-width:400px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.stok .mat-card-subtitle, .mat-card-content{
+  font-size: inherit!important;
+}
+.stok .mat-form-field-wrapper{
+  padding: 0!important;
+  padding-bottom: 5px!important;
+}
+
+ 
+.card-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.card-container mat-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+table {
+  width: 100%;
+}
+.table-p3 td, .table-p3 th {
+  padding: 0.35rem !important;
+}
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-date-range-input-start-wrapper{
+  min-width: 65px  !important;
+  text-align: center;
+}
+.mat-date-range-input-end-wrapper{
+  min-width: 65px  !important;
+  text-align: center;
+}
+.mat-date-range-input-mirror{
+  min-width: 100px  !important;
+}
+
+.spinner-loading{
+  width: 24px !important; 
+  height: 24px !important; 
+}
+.spinner-loading svg{
+  width: 24px !important; 
+  height: 24px !important; 
+}
+
+/** page-not-found **/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+#pagenot {
+    --EASE_INOUT_QUAD: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    --EASE_IN_QUAD: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --EASE_OUT_QUAD: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    --COLOR_UI_PHARMACY: #3f51b5 ;
+    --loaderPill_DURATION: 1800ms;
+}
+
+
+.absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loaderPill {
+    text-align: center;
+}
+
+.loaderPill-anim {
+    height: 160px;
+}
+
+.loaderPill-anim-bounce {
+    -webkit-animation: loaderPillBounce 1800ms linear infinite;
+            animation: loaderPillBounce 1800ms linear infinite;
+    -webkit-animation: loaderPillBounce var(--loaderPill_DURATION) linear infinite;
+            animation: loaderPillBounce var(--loaderPill_DURATION) linear infinite;
+}
+
+.loaderPill-anim-flop {
+    transform-origin: 50% 50%;
+    -webkit-animation: loaderPillFlop 1800ms linear infinite;
+            animation: loaderPillFlop 1800ms linear infinite;
+    -webkit-animation: loaderPillFlop var(--loaderPill_DURATION) linear infinite;
+            animation: loaderPillFlop var(--loaderPill_DURATION) linear infinite;
+}
+
+.loaderPill-pill {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid #237db5;
+    border: 1px solid var(--COLOR_UI_PHARMACY);
+    background-image: linear-gradient(to right, #237db5 50%, #ffffff 50%);
+    background-image: linear-gradient(to right, var(--COLOR_UI_PHARMACY) 50%, #ffffff 50%);
+}
+
+.loaderPill-floor {
+    display: block;
+    text-align: center;
+}
+
+.loaderPill-floor-shadow {
+    display: inline-block;
+    width: 70px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: color(#3f51b5 alpha(26%));
+    background-color: color(var(--COLOR_UI_PHARMACY) alpha(26%));
+    transform: translateY(-15px);
+    -webkit-animation: loaderPillScale 1800ms linear infinite;
+            animation: loaderPillScale 1800ms linear infinite;
+    -webkit-animation: loaderPillScale var(--loaderPill_DURATION) linear infinite;
+            animation: loaderPillScale var(--loaderPill_DURATION) linear infinite;
+}
+
+.loaderPill-text {
+    font-weight: bold;
+    color: #3f51b5;
+    color: var(--COLOR_UI_PHARMACY);
+    text-transform: uppercase;
+}
+
+@-webkit-keyframes loaderPillBounce {
+    0% {
+        transform: translateY(123px);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    25% {
+        transform: translateY(40px);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    50% {
+        transform: translateY(120px);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    75% {
+        transform: translateY(20px);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    100% {
+        transform: translateY(120px);
+    }
+}
+
+@keyframes loaderPillBounce {
+    0% {
+        transform: translateY(123px);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    25% {
+        transform: translateY(40px);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    50% {
+        transform: translateY(120px);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    75% {
+        transform: translateY(20px);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    100% {
+        transform: translateY(120px);
+    }
+}
+
+@-webkit-keyframes loaderPillFlop {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(450deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes loaderPillFlop {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(450deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@-webkit-keyframes loaderPillScale {
+    0%   {
+        transform: translateY(-15px) scale(1, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    25%  {
+        transform: translateY(-15px) scale(0.7, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    50%  {
+        transform: translateY(-15px) scale(1, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    75%  {
+        transform: translateY(-15px) scale(0.6, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    100% {
+        transform: translateY(-15px) scale(1, 1);
+    }
+}
+
+@keyframes loaderPillScale {
+    0%   {
+        transform: translateY(-15px) scale(1, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    25%  {
+        transform: translateY(-15px) scale(0.7, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    50%  {
+        transform: translateY(-15px) scale(1, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-animation-timing-function: var(--EASE_OUT_QUAD);
+                animation-timing-function: var(--EASE_OUT_QUAD);
+    }
+    75%  {
+        transform: translateY(-15px) scale(0.6, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+                animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        -webkit-animation-timing-function: var(--EASE_IN_QUAD);
+                animation-timing-function: var(--EASE_IN_QUAD);
+    }
+    100% {
+        transform: translateY(-15px) scale(1, 1);
+    }
+}
+
+/** page-not-found finish **/

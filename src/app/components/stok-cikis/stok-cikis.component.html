@@ -1,0 +1,114 @@
+<div style="height: calc(100vh - 150px); padding: 20px">
+  <mat-grid-list cols="1" rowHeight="fit" style="height: calc(100vh - 150px)" gutterSize="20px"
+    class="mat-grid-tile-depo">
+    <mat-grid-tile>
+      <mat-card class="card-container mat-elevation-z8">
+        <mat-card-title>
+          <mat-toolbar color="dark">
+            <span class="example-spacer"></span>
+            <button mat-button color="accent" (click)="openDialog()">İlaç Listesi</button>
+            <button mat-button class="mat-success" (click)="gecmisSiparisListesi()">Geçmiş Sipariş Listesi</button>
+          </mat-toolbar>
+        </mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="stokCikisForm" style="display: flex;align-items: baseline;">
+            <span class="ml-5"><span class="text-muted">Tarih : </span>{{today|date}}</span>
+            <span class="ml-5">
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="isteyendepo" required>
+                  <mat-option *ngFor="let item of aktifDepolar" [value]="item.kod">{{item.aciklama}}</mat-option>
+                </mat-select>
+                <mat-label>İşlem Yapan Birim</mat-label>
+              </mat-form-field>
+            </span>
+            <span class="ml-5">
+              <mat-form-field appearance="outline">
+                <input type="text" matInput autocomplete="off" formControlName="aciklama" required />
+                <mat-label>Açıklama</mat-label>
+              </mat-form-field>
+            </span>
+            <span class="ml-5">
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="istekdepo" required [disabled]="siparisListesi.length>0">
+                  <mat-option *ngFor="let item of talepAktifDepolar " [value]="item.kod">{{item.aciklama}}</mat-option>
+                </mat-select>
+                <mat-label>İstek Depo</mat-label>
+              </mat-form-field>
+            </span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button color="warn" (click)="stokCikisRefresh()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </form>
+          <table #siparisList mat-table [dataSource]="siparisListesi">
+            <ng-container matColumnDef="index">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let i = index;"><b>#{{i+1}}</b></td>
+            </ng-container>
+
+            <ng-container matColumnDef="barkodNo">
+              <th mat-header-cell *matHeaderCellDef>BARKOD NO</th>
+              <td mat-cell *matCellDef="let element">{{ element.barkodNo }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stokAd">
+              <th mat-header-cell *matHeaderCellDef>ADI</th>
+              <td mat-cell *matCellDef="let element">{{ element.stokAd }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stokTur">
+              <th mat-header-cell *matHeaderCellDef>STOK TÜRÜ</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.stokTur == "1" ? "İLAÇ" : element.stokTur=="2"?"SARF MALZEME":"ORTEZ PROTEZ MALZEME" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="anaBirimN">
+              <th mat-header-cell *matHeaderCellDef>ANABIRIM</th>
+              <td mat-cell *matCellDef="let element">{{ element.anaBirimN }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="adet">
+              <th mat-header-cell *matHeaderCellDef>Stok / Istenilen Adet</th>
+              <td mat-cell *matCellDef="let element"><span class="text-danger">{{element.toplam}}</span> /<span
+                  class="text-info">{{ element.adet }}</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="button">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button class="mat-success" (click)="adetChange(element, 1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="adetChange(element, -1)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="removeItem(element)" class="ml-4">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+        </mat-card-content>
+        <mat-card-actions class="fixed-button">
+          <div *ngIf="responseStokCikis">
+            <button mat-icon-button title="Download" (click)="getPdf()">
+              <mat-icon style="font-size: 35px;">description</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="!responseStokCikis">
+            <button mat-raised-button color="primary" [disabled]="!stokCikisForm.valid || siparisListesi.length<=0" *ngIf="!loading" (click)="saveSiparislist()">
+              Kaydet
+            </button>
+            <mat-spinner class="spinner-loading" *ngIf="loading"></mat-spinner>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

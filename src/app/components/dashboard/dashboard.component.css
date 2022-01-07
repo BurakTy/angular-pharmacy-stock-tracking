@@ -1,0 +1,22 @@
+mat-grid-tile {
+    background: lightblue;
+  }
+
+  .example-container {
+    height:calc(100vh - 105px);
+    margin: 10px;
+    box-shadow: 0px 0px 20px  grey;
+  }
+ 
+  .side-nav{
+    width: 300px;
+  }
+
+  .side-nav a:hover{
+    background-color: rgb(120, 134, 204,0.3) ;
+    color:red;
+  }
+
+  .active {
+    color:red;
+  }

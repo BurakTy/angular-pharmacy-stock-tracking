@@ -1,0 +1,118 @@
+<div style="height: calc(100vh - 150px); padding: 20px">
+    <mat-grid-list cols="3" rowHeight="fit" style="height: calc(100vh - 150px)" gutterSize="20px"
+        class="mat-grid-tile-depo">
+        <mat-grid-tile colspan="2">
+            <mat-card class="card-container mat-elevation-z8">
+                <table mat-table [dataSource]="stokHastas">
+                    <ng-container matColumnDef="kimlikNo">
+                        <th mat-header-cell *matHeaderCellDef>KİMLİK NO</th>
+                        <td mat-cell *matCellDef="let element"  (click)="getStokHastaById(element)">{{ element.kimlikNoGizli }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="adSoyad">
+                        <th mat-header-cell *matHeaderCellDef>AD SOYAD</th>
+                        <td mat-cell *matCellDef="let element"  (click)="getStokHastaById(element)">{{ element.ad }} {{ element.soyad }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="cinsiyet">
+                        <th mat-header-cell *matHeaderCellDef>CİNSİYET</th>
+                        <td mat-cell *matCellDef="let element"  (click)="getStokHastaById(element)">
+                            {{ element.cinsiyet== "K" ? "KADIN" : element.cinsiyet=="E"?"ERKEK ":"BELİRSİZ" }}
+                        </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="button">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element" class="text-right" style="width: 30px;">
+                           <!-- <button mat-icon-button color="warn" > <mat-icon aria-hidden="false">info</mat-icon></button> -->
+                         
+                        </td>
+                    </ng-container>
+                  
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns" 
+                        [class.demo-row-is-clicked]="currentHasta ? row.id == currentHasta.id : false">
+                    </tr>
+                </table>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card class="card-container stok">
+                <mat-card-title>
+                    <div>HASTA KAYIT</div>
+                    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
+                        (click)="createstokHastaForm()">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                </mat-card-title>
+                <mat-divider></mat-divider>
+                <mat-card-content class="mt-3">
+                    <form [formGroup]="stokHastaForm" autocomplete="off">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="uyruk">
+                                <mat-option disabled>-- UYRUK SEÇİNİZ --</mat-option>
+                                <mat-option [value]="1">TÜRKİYE</mat-option>
+                                <mat-option [value]="2">ARNAVUTLUK</mat-option>
+                                <mat-option [value]="3">DİĞER</mat-option>
+                            </mat-select>
+                            <mat-label>UYRUK</mat-label>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>KİMLİK NO</mat-label>
+                            <input matInput type="text" formControlName="kimlikNo" maxlength="30" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>AD</mat-label>
+                            <input matInput type="text" formControlName="ad" maxlength="30" oninput="this.value = this.value.toLocaleUpperCase()" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>SOYAD</mat-label>
+                            <input matInput type="text" formControlName="soyad" maxlength="30" oninput="this.value = this.value.toLocaleUpperCase()" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select formControlName="cinsiyet">
+                                <mat-option disabled>-- CİNSİYET SEÇİNİZ --</mat-option>
+                                <mat-option value="K">KADIN</mat-option>
+                                <mat-option value="E">ERKEK</mat-option>
+                                <mat-option value="B">BELİRSİZ</mat-option>
+                            </mat-select>
+                            <mat-label>CİNSİYET</mat-label>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>YAŞ</mat-label>
+                            <input matInput maxlength="100" type="number" formControlName="yas" maxlength="150" />
+                        </mat-form-field>
+
+                       
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>SON GİRİŞ TARİH</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="girisTarih" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                       
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>SON ÇIKIŞ TARİH</mat-label>
+                            <input matInput [matDatepicker]="pickerc" formControlName="cikisTarih" >
+                            <mat-datepicker-toggle matSuffix [for]="pickerc"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerc></mat-datepicker>
+                        </mat-form-field>
+                       
+                    </form>
+                </mat-card-content>
+                <mat-card-actions class="fixed-button">
+
+                    <button mat-raised-button color="primary" [disabled]="!stokHastaForm.valid"
+                        *ngIf="currentHasta==null" (click)="stokHastaKaydet(false)">
+                        Kaydet
+                    </button>
+                    <button mat-raised-button color="primary" [disabled]="!stokHastaForm.valid"
+                        *ngIf="currentHasta!=null" (click)="stokHastaKaydet(true)">
+                        Güncelle
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

@@ -1,0 +1,19 @@
+
+  .side-nav{
+    width: 300px;
+  }
+
+  .side-nav a:hover{
+    background-color: rgb(120, 134, 204,0.3) !important;
+    color:red !important;
+    
+    text-shadow: 0px 0px 3px black;
+   
+  }
+
+  .active {
+    color:red !important;
+    zoom: 1.1;
+    text-shadow: 0px 0px 3px black;
+   
+  }

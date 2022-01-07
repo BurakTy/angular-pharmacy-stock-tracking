@@ -1,0 +1,79 @@
+.panel-lite {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 360px;
+    background: #fff;
+    padding: 45px 20px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    top:10%
+  }
+  .panel-lite h4 {
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    color: #FF4081;
+    margin: 15px auto;
+  }
+
+.thumbur {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    background-color: #efefef;
+    *zoom: 1;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFEFEF', endColorstr='#FFE1E1E1');
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmZWZlZiIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWZlZmVmIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNlMWUxZTEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMWUxZTEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+    background-size: 100%;
+    background-image: linear-gradient(to right, #efefef 0%, #efefef 50%, #e1e1e1 50%, #e1e1e1 100%);
+    margin: auto;
+    border-radius: 100%;
+  }
+  .thumbur:before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    background-color: #efefef;
+    left: 50%;
+    bottom: 50px;
+    z-index: 5;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .icon-lock {
+    position: relative;
+    width: 80px;
+    height: 60px;
+    background: #FFA000;
+    margin: auto;
+    transform: translateY(60px);
+    border-radius: 8px;
+    box-shadow: 0 0 2px #F57C00 inset;
+  }
+  .icon-lock:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 35px;
+    border: 9px solid #F57C00;
+    border-bottom: none;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+  .icon-lock:before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #efefef;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    border-radius: 100%;
+  }

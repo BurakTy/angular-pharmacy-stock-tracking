@@ -1,0 +1,68 @@
+
+  <mat-toolbar color="primary" class="w-100" style="display: flex;flex:1">
+    <button mat-icon-button (click)="toogleSideNav()" *ngIf="false">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <img src="https://file.adetsis.net/adetsisAlogo.PNG" width="25" alt="Adetsis Eczane Yönetim sistemi" />
+    </button>
+    <!-- <span>Eczane Yönetim Sistemi</span> -->
+
+    <mat-nav-list class="list-horizontal ml-3 side-nav w-100 ">
+      <a mat-list-item routerLink="" class="text-white  text-center" routerLinkActive="active" *ngIf="checkYetki() || checkYetki('onay')"
+        [routerLinkActiveOptions]="{exact: true}">
+        <!-- <mat-icon matListIcon>playlist_add_check </mat-icon> -->
+        <p matLine >Onaylama</p>
+      </a>
+      <a mat-list-item routerLink="/stokcikis" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('istek')">
+        <!-- <mat-icon matListIcon>list_alt</mat-icon> -->
+        <p matLine>Siparişler</p>
+      </a>
+      <a mat-list-item routerLink="/stokdepo" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('stokgiris',true)">
+        <!-- <mat-icon matListIcon>backup_table</mat-icon> -->
+        <p matLine>Depo Ekle</p>
+      </a>
+      <a mat-list-item routerLink="/stokkart" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('stokgiris',true)">
+        <!-- <mat-icon matListIcon>post_add</mat-icon> -->
+        <p matLine>Stok Kart Ekle</p>
+      </a>
+      <a mat-list-item routerLink="/stokekle" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('stokgiris',true)">
+        <!-- <mat-icon matListIcon>plus_one</mat-icon> -->
+        <p matLine>Fatura Giriş</p>
+      </a>
+      <a mat-list-item routerLink="/stokgoster" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('istek')">
+        <!-- <mat-icon matListIcon>plus_one</mat-icon> -->
+        <p matLine>Tüm Stok</p>
+      </a>
+      
+      <a mat-list-item routerLink="/ilaccikis" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('ilacCikis')">
+        <!-- <mat-icon matListIcon>plus_one</mat-icon> -->
+        <p matLine>İlaç Çıkış</p>
+      </a>
+      
+      <a mat-list-item routerLink="/hastakayit" routerLinkActive="active" class=" text-white text-center" *ngIf="checkYetki()||checkYetki('hastaKayit')">
+        <!-- <mat-icon matListIcon>plus_one</mat-icon> -->
+        <p matLine>Hasta Kayıt</p>
+      </a>
+    </mat-nav-list>
+    <span class="example-spacer"></span>
+    {{userDetail.depo}}
+    <button mat-button [matMenuTriggerFor]="menu" class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      <mat-icon>person</mat-icon>
+      {{userDetail.name}}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>lock</mat-icon>
+        <span>{{for=="tr"?"Parola Değiştir":"Change Password"}}</span>
+      </button>
+      <a mat-menu-item *ngIf="checkYetki()" href="/register">
+        <mat-icon>person_add</mat-icon>
+        <span>{{for=="tr"?"Yeni Kullanıcı":"New User"}}</span>
+      </a>
+      <button mat-menu-item class="example-icon" aria-label="Çıkış" (click)="logout()">
+        <mat-icon>logout</mat-icon>{{for=="tr"?"Çıkış":"Logout"}}
+      </button>
+    </mat-menu>
+  </mat-toolbar>

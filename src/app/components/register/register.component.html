@@ -1,0 +1,81 @@
+<div class="w-50 mx-auto p-5">
+    <mat-card class="card-container stok">
+        <mat-card-title>
+            <div>New User / Yeni Kullanıcı</div>
+            <button mat-icon-button color="warn" (click)="createRegisterForm()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content class="p-5">
+            <form [formGroup]="registerForm" autocomplete="off">
+                <div class="d-flex mb-2">
+                    <mat-form-field appearance="outline" class="w-100 mx-2">
+                        <mat-label>FIRST NAME / ADI</mat-label>
+                        <input matInput type="text" formControlName="firstName" required
+                            oninput="this.value = this.value.toLocaleUpperCase()" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100 mx-2">
+                        <mat-label>LAST NAME / SOYADI</mat-label>
+                        <input matInput type="text" formControlName="lastName" required
+                            oninput="this.value = this.value.toLocaleUpperCase()" />
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex mb-2">
+                    <mat-form-field appearance="outline" class="w-100 mx-2">
+                        <mat-label>EMAIL / EPOSTA</mat-label>
+                        <input matInput type="email" formControlName="email" required />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100 mx-2">
+                        <mat-label>PASSWORD / PAROLA</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required />
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <button mat-icon-button matSuffix (click)="randomPass()">
+                            <mat-icon>password</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex mb-2">
+                    <mat-form-field appearance="outline" class="w-100 mx-2">
+                        <mat-select formControlName="fk_Depo" (selectionChange)="updateYetki()" required>
+                            <mat-option disabled>-- DEPO SEÇİNİZ --</mat-option>
+                            <mat-option [value]="item.kod" *ngFor="let item of depolar">{{item.aciklama}}</mat-option>
+                        </mat-select>
+                        <mat-label>DEPO SEÇİNİZ</mat-label>
+                    </mat-form-field>
+                </div>
+
+                
+
+
+                <mat-card-title><small class="pb-2" style="border-bottom : 1px solid grey">Claims / Yetkiler</small>
+                </mat-card-title>
+               
+                <div class="d-flex">
+                    <div class="w-100">
+                        <mat-checkbox formControlName="istek">Depodan İstek Yetkisi </mat-checkbox> <br>
+                        <mat-checkbox formControlName="onay">Depoya Gelen İstekleri Onay Yetkisi</mat-checkbox> <br>
+                        <mat-checkbox formControlName="stokGiris">Stok , Depo ve Fatura Giriş Yetkisi </mat-checkbox> <br>
+                        <mat-checkbox formControlName="kullaniciEkle">Depoya Kullanıcı Ekleme Yetkisi</mat-checkbox> <br>
+                    </div>
+                    <div class="w-100">
+                        <mat-checkbox formControlName="hastaKayit">Yeni Hasta Kayıt </mat-checkbox> <br>
+                        <mat-checkbox formControlName="ilacCikis">Depodan Hastaya İlac Cıkışı</mat-checkbox> <br>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card-content>
+        <mat-card-actions class="text-right">
+            <button class="mr-2 mb-2" mat-raised-button color="primary" [disabled]="!registerForm" *ngIf="!loading"
+                (click)="register()">
+                Kaydet
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

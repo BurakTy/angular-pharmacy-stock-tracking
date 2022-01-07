@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Geçmiş Fatura Listesi</h1>
+<div style="display: flex;justify-content: space-around">
+    <mat-form-field appearance="fill" class="w-75">
+        <mat-label>Tarih Aralığı Giriniz / Enter a Date Range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Başlangıç / Start">
+            <input matEndDate formControlName="end" placeholder="Bitiş / End">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+
+    </mat-form-field>
+    <button mat-stroked-button color="primary" style="height: 36px;margin: 5px;" (click)="searchByDate()">Search / Arama
+    </button>
+</div>
+<div mat-dialog-content style="min-width: 50vw">
+    <mat-list>
+        <div mat-subheader>
+            <div class="w-100">Arama Sonuç <span class="float-right">{{aramaListesi.length}} </span></div>
+        </div>
+        <mat-list-item *ngFor="let item of aramaListesi" class="py-2" style="font-size: inherit">
+            <div class="d-flex align-items-baseline w-100 py-2" style="border-bottom: 1px solid grey">
+                <div class="w-100">
+                    <span class="float-right mx-5 small pt-2"> <span class="text-primary"
+                            style="font-size:small;">{{item.faturaNo}}</span></span>
+                    <div class="span-dot ml-3" title="{{item.gelenBilgiUnvan}}">
+                        {{item.gelenBilgiUnvan}}
+                    </div>
+                </div>
+                <span class="example-spacer "></span>
+
+                <span class="example-spacer "></span>
+
+                <div style="display: flex;">
+                    <div>
+                        <button mat-icon-button title="Download" (click)="getPdf(item.id)">
+                            <mat-icon matBadge="1"  matBadgeSize="small">description</mat-icon>
+
+                        </button>
+                    </div>
+                   <div>
+                    <button mat-icon-button title="Download" (click)="getPdfB(item.id)">
+                        <mat-icon matBadge="2" matBadgeSize="small">description</mat-icon>
+                    </button>
+                   </div>
+                </div>
+                <!-- <button mat-stroked-button color="primary" (click)="getPdf(item.id)">FLËTE</button>
+                <button mat-stroked-button color="primary" (click)="getPdfB(item.id)">PROCES</button> -->
+            </div>
+        </mat-list-item>
+
+    </mat-list>
+
+
+</div>

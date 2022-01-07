@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Fatura Bilgi Onay</h1>
+<div mat-dialog-content>
+    <form [formGroup]="faturaForm" autocomplete="off">
+        <mat-form-field appearance="outline" style="width: 48%;" class="mx-1"> 
+          <mat-label>Fatura No</mat-label>
+          <input matInput type="text" formControlName="faturaNo" required/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+            <mat-label>Fatura Tarih</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="faturaTarih" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+          <mat-label>Bakanlık Onay No</mat-label>
+          <input matInput type="text" formControlName="bakanlikOnayNo" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+          <mat-label>Bakanlık Protokol No</mat-label>
+          <input matInput type="text" formControlName="bakanlikProtokolNo" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+          <mat-label>İhale No</mat-label>
+          <input matInput type="text" formControlName="ihaleNo" />
+        </mat-form-field>
+
+        <mat-divider class="my-2"></mat-divider>
+       <div class="w-100"> 
+        <mat-form-field appearance="outline" style="width: 97%;" class="mx-1">
+            <mat-label>Gelen Yer Unvan</mat-label>
+            <input matInput type="text" formControlName="gelenBilgiUnvan" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+              <mat-label>Fatura No</mat-label>
+              <input matInput type="text" formControlName="gelenFaturaNo" required/>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" style="width: 48%;" class="mx-1">
+                <mat-label>Fatura Tarih</mat-label>
+                <input matInput [matDatepicker]="pickerf" formControlName="gelenFaturaTarih" required>
+                <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
+                <mat-datepicker #pickerf></mat-datepicker>
+              </mat-form-field>
+       </div>
+      </form>
+
+      <div class="w-100">
+        <button mat-raised-button class="mat-success float-right" (click)="faturaOnayla()"> Onayla</button>
+      </div>
+</div>
